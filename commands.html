@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>OShare Add-in Commands</title>
+  <title>OShare Commands</title>
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
   <script type="text/javascript">
+    Office.initialize = function () {
+      console.log("Office.js initialized");
+    };
+
     function launchForm(event) {
       Office.context.ui.displayDialogAsync(
         "https://forms.office.com/e/0WMwRUR02J",
@@ -18,6 +23,7 @@
   </script>
 </head>
 <body>
-  <p>Outlook Add-in Command Handler</p>
+  <p>OShare v1.5 Add-in Command Handler Loaded.</p>
 </body>
 </html>
+
