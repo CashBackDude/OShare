@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OShare Add-in Commands</title>
+  <script type="text/javascript">
+    function launchForm(event) {
+      Office.context.ui.displayDialogAsync(
+        "https://forms.office.com/e/0WMwRUR02J",
+        { height: 60, width: 60 },
+        function (asyncResult) {
+          if (asyncResult.status !== Office.AsyncResultStatus.Succeeded) {
+            console.error("Dialog failed:", asyncResult.error.message);
+          }
+        }
+      );
+      event.completed();
+    }
+  </script>
+</head>
+<body>
+  <p>Outlook Add-in Command Handler</p>
+</body>
+</html>
