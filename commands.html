@@ -1,29 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>OShare Commands</title>
+  <title>OShare Launcher</title>
   <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <script type="text/javascript">
-    Office.initialize = function () {
-      console.log("Office.js initialized");
+  <script>
+    Office.initialize = () => {
+      console.log("Office initialized for OShare.");
     };
 
     function launchForm(event) {
-      Office.context.ui.displayDialogAsync(
-        "https://forms.office.com/e/0WMwRUR02J",
-        { height: 60, width: 60 },
-        function (asyncResult) {
-          if (asyncResult.status !== Office.AsyncResultStatus.Succeeded) {
-            console.error("Dialog failed:", asyncResult.error.message);
-          }
-        }
-      );
-      event.completed();
+      // Opens your Microsoft Form in a new browser tab
+      window.open("https://forms.office.com/e/0WMwRUR02J", "_blank");
+      event.completed(); // Required to indicate function is done
     }
   </script>
 </head>
 <body>
-  <p>OShare v1.5 Add-in Command Handler Loaded.</p>
+  <!-- You don't need anything visual -->
 </body>
 </html>
-
