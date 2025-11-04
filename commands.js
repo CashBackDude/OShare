@@ -6,7 +6,7 @@
 /* global global, Office, self, window */
 
 Office.onReady(() => {
-  // If needed, Office.js is ready to be called
+  // Office.js is ready to be called
 });
 
 /**
@@ -14,21 +14,35 @@ Office.onReady(() => {
  * @param event {Office.AddinCommands.Event}
  */
 function action(event) {
-  const message = {
-    type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
-    message: "Opened Microsoft 365 end-user quarantine in browser.",
-    icon: "Icon.80x80",
-    persistent: true,
-  };
+  try {
+    const targetUrl = "https://forms.office.com/e/0WMwRUR02J";
 
-  // Open end-user quarantine in a browser window
-  window.open("https://security.microsoft.com/quarantine?viewid=Email");
+    const message = {
+      type: Office.MailboxEnums.ItemNotificationMessageType
+        .InformationalMessage,
+      message: "Opened Microsoft Form in browser.",
+      icon: "Icon.80x80", // Must match the icon id in your manifest resources
+      persistent: true,
+    };
 
-  // Show a notification message
-  // Office.context.mailbox.item.notificationMessages.replaceAsync("action", message);
+    // Open Microsoft Form in a browser window
+    window.open(targetUrl);
 
-  // Be sure to indicate when the add-in command function is complete
-  event.completed();
+    // Optionally show a notification in the current item, if available
+    if (
+      Office.context &&
+      Office.context.mailbox &&
+      Office.context.mailbox.item
+    ) {
+      Office.context.mailbox.item.notificationMessages.replaceAsync(
+        "formAction",
+        message
+      );
+    }
+  } finally {
+    // Be sure to indicate when the add-in command function is complete
+    event.completed();
+  }
 }
 
 function getGlobal() {
